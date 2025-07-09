@@ -25,7 +25,7 @@ class Homepage extends StatelessWidget {
           APIButton(
             title: "POST",
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const postAPI()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const PostApiPage()));
             },
             color: Colors.green,
           ),
