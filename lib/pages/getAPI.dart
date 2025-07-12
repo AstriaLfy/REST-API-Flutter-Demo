@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:learning_rest_api/models/users.dart';
 
 class getAPI extends StatefulWidget {
   const getAPI({super.key});
@@ -11,7 +12,7 @@ class getAPI extends StatefulWidget {
 }
 
 class _getAPIState extends State<getAPI> {
-  List<dynamic> users = [];
+  List<Result> users = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +22,11 @@ class _getAPIState extends State<getAPI> {
           itemCount: users.length,
           itemBuilder: (context,index){
             final user = users[index];
-            final email = user['email'];
-            final name = user['name']['first'];
-            final imageUrl = user['picture']['thumbnail'];
+            final email = user.email;
+            final name = user.gender;
+            final nat = user.nat;
         return ListTile(
-          leading: ClipRRect(borderRadius: BorderRadius.circular(100), child: Image.network(imageUrl)),
+          leading: ClipRRect(borderRadius: BorderRadius.circular(100), child: Text(nat)),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -44,10 +45,15 @@ class _getAPIState extends State<getAPI> {
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final body = response.body;
-    final json = jsonDecode(body);
-    setState(() {
-      users = json['results'];
-    });
-    print("Fetch Complete");
+    if (response.statusCode == 200){
+      final Product prodak = productFromJson(body);
+      setState(() {
+        users = prodak.results;
+      });
+      print("Fetch Complete");
+    }
+    else{
+      print("Fetch Error");
+    }
   }
 }

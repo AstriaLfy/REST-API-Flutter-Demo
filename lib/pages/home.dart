@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_rest_api/pages/deleteAPI.dart';
 import 'package:learning_rest_api/pages/getAPI.dart';
+import 'package:learning_rest_api/pages/getAPILat.dart';
 import 'package:learning_rest_api/pages/postAPI.dart';
 
 class Homepage extends StatelessWidget {
@@ -18,7 +19,7 @@ class Homepage extends StatelessWidget {
           APIButton(
             title: "GET",
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const getAPI()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const getAPIlat()));
             },
             color: Colors.blue,
           ),
