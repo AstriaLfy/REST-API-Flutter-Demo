@@ -13,6 +13,8 @@ class getAPI extends StatefulWidget {
 
 class _getAPIState extends State<getAPI> {
   List<Result> users = [];
+  Info? apiInfo;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +27,8 @@ class _getAPIState extends State<getAPI> {
             final email = user.email;
             final name = user.gender;
             final nat = user.nat;
+            final infoTest = apiInfo?.seed;
+
         return ListTile(
           leading: ClipRRect(borderRadius: BorderRadius.circular(100), child: Text(nat)),
           title: Column(
@@ -32,6 +36,7 @@ class _getAPIState extends State<getAPI> {
             children: [
               Text(email),
               Text(name.toString()),
+              Text(infoTest!)
             ],
           ),
         );
@@ -49,6 +54,7 @@ class _getAPIState extends State<getAPI> {
       final Product prodak = productFromJson(body);
       setState(() {
         users = prodak.results;
+        apiInfo = prodak.info;
       });
       print("Fetch Complete");
     }
@@ -56,4 +62,5 @@ class _getAPIState extends State<getAPI> {
       print("Fetch Error");
     }
   }
+
 }
